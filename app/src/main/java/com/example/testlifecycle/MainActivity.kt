@@ -1,9 +1,11 @@
 package com.example.testlifecycle
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.testlifecycle.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.aFragmentBtn.setOnClickListener {
             fragmentTransaction.replace(R.id.frameLayout, aFragment).addToBackStack(null).commit()
+            showToast("hellow world", Toast.LENGTH_SHORT)
         }
 
         binding.removeFragment.setOnClickListener {
@@ -61,5 +64,9 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d(TAG, "main : onDestroy")
+    }
+
+    fun Context.showToast(msg:String, time:Int){
+        Toast.makeText(this, msg, time).show()
     }
 }
