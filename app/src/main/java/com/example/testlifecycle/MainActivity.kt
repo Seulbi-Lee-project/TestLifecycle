@@ -17,9 +17,24 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "main : onCreate")
         var view = binding.root
         setContentView(view)
-        binding.mainBtn.setOnClickListener {
+        binding.secondBtn.setOnClickListener {
             val intent = Intent(this, SecondActivity::class.java)
             startActivity(intent)
+        }
+
+        val aFragment = AFragment()
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        binding.aFragmentBtn.setOnClickListener {
+            fragmentTransaction.replace(R.id.frameLayout, aFragment).addToBackStack(null).commit()
+        }
+
+        binding.removeFragment.setOnClickListener {
+            val transaction = supportFragmentManager.beginTransaction()
+            val frameLayout = supportFragmentManager.findFragmentById(R.id.frameLayout)
+            transaction.remove(frameLayout!!)
+            transaction.commit()
         }
     }
 
